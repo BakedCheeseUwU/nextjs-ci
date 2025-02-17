@@ -29,4 +29,8 @@ jobs:
       - name: Delete old container
         run: docker rm -f nextjs-app-container
       - name: Run docker container
-        run: docker run -d -p 3000:3000 --name nextjs-app-container bakedcheeseuwu/nextjs-app
+        run: |
+          docker run -d -p 3000:3000 \
+          -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
+          -e SITE_URL=${{ secrets.SITE_URL }} \
+          --name nextjs-app-container bakedcheeseuwu/nextjs-app
